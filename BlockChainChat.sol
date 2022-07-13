@@ -2,7 +2,7 @@ pragma solidity 0.8.7;
 
 
 contract chatChain {
-    event NewMessage(address indexed from, uint timestamp, string message);
+    event newMessage(address indexed from, uint timestamp, string message);
 
     struct Message {
         address waver;
@@ -16,6 +16,7 @@ contract chatChain {
         uint contentLength = bytes(_content).length;
         require(contentLength > 0, "Don't forget to write a message!");
         messages.push(Message(msg.sender, _content, block.timestamp));
+        emit newMessage(msg.sender, block.timestamp, _content)
     }
 
     function getMessages() view public returns (Message[] memory) {
